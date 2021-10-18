@@ -1,0 +1,14 @@
+h2 {
+  margin-top: 0rem;
+  margin-bottom: 1rem;
+}
+
+li {
+  box-shadow: 7px 7px 20px 5px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  padding: 1rem;
+  margin: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+}
