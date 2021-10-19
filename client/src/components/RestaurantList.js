@@ -21,7 +21,7 @@ const RestaurantList = () => {
         {restaurantList.map((res) => {
           return (
             <li className="restaurant grid" key={res.id}>
-              <img src={res.image} alt={res.name} />
+              <img src={res.image} alt={res.name} className="restaurant-img" />
               <div className="text-cont">
                 <h2 className="restaurant-name">{res.name}</h2>
                 <p className="restaurant-desc">{res.description}</p>
@@ -29,7 +29,7 @@ const RestaurantList = () => {
                   className="link-reserve"
                   to={`/restaurants/${res.id}/reserve`}
                 >
-                  Reserve Now &rarr;
+                  Reserve now &rarr;
                 </Link>
               </div>
             </li>
