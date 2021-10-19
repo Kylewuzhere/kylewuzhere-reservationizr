@@ -4,9 +4,9 @@ h2 {
 }
 
 .restaurant {
-  box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: 5px 5px 12px 2px rgba(0, 0, 0, 0.15);
   list-style: none;
-  margin: 3rem;
+  margin: 2rem 0 3rem;
   padding: 1rem;
 }
 
@@ -22,7 +22,7 @@ h2 {
   cursor: pointer;
   display: block;
   margin-top: 2rem;
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 1rem;
   text-decoration: none;
   width: fit-content;
 }
@@ -35,9 +35,12 @@ h2 {
 }
 
 @media screen and (min-width: 768px) {
+  .restaurant-img {
+    min-width: 12.5rem;
+  }
+
   .container {
-    min-width: 45rem;
-    max-width: 45rem;
+    max-width: 40rem;
   }
 
   .grid {
