@@ -1,5 +1,6 @@
 import "./RestaurantList.css";
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const RestaurantList = () => {
   const [restaurantList, setRestaurantList] = useState([]);
@@ -16,13 +17,21 @@ const RestaurantList = () => {
   return (
     <>
       <h1>Restaurants</h1>
-      <div className="restaurants-container">
+      <div className="restaurant-cont">
         {restaurantList.map((res) => {
           return (
-            <li key={res.id}>
+            <li className="restaurant grid" key={res.id}>
               <img src={res.image} alt={res.name} />
-              <h2 className="restaurant-name">{res.name}</h2>
-              <p className="restaurant-description">{res.description}</p>
+              <div className="text-cont">
+                <h2 className="restaurant-name">{res.name}</h2>
+                <p className="restaurant-desc">{res.description}</p>
+                <Link
+                  className="link-reserve"
+                  to={`/restaurants/${res.id}/reserve`}
+                >
+                  Reserve Now &rarr;
+                </Link>
+              </div>
             </li>
           );
         })}
