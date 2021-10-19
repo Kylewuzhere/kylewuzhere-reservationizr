@@ -36,4 +36,22 @@ describe("app", () => {
         .expect((res) => expect(res.body).toEqual(expected));
     });
   });
+  describe("GET /restaurants/:id", () => {
+    it("should retrieve a single restaurant data by id", async () => {
+      const expected = {
+        id: "616005e26d59890f8f1e619b",
+        name: "Thai Isaan",
+        description:
+          "We offer guests a modern dining experience featuring the authentic taste of Thailand. Food is prepared fresh from quality ingredients and presented with sophisticated elegance in a stunning dining setting filled with all the richness of Thai colour, sound and art.",
+        image: "https://i.ibb.co/HPjd2jR/thai.jpg",
+      };
+
+      await request(app)
+        .get(`/restaurants/${expected.id}`)
+        .set("Accept", "application/json")
+        .expect("Content-Type", /json/)
+        .expect(200)
+        .expect((res) => expect(res.body).toEqual(expected));
+    });
+  });
 });
