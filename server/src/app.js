@@ -1,11 +1,19 @@
 const express = require("express");
 const cors = require("cors");
 const RestaurantModel = require("./models/RestaurantModel");
+const ReservationModel = require("./models/ReservationModel");
 const validId = require("./utils/validId");
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+app.post("/reservations", async (req, res) => {
+  const { body } = req;
+  const reservation = new ReservationModel(body);
+  await reservation.save();
+  res.status(201).send(reservation);
+});
 
 app.get("/restaurants", async (req, res) => {
   const restaurants = await RestaurantModel.find({});
