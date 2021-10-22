@@ -25,10 +25,7 @@ const RestaurantList = () => {
               <div className="text-cont">
                 <h2 className="restaurant-name">{name}</h2>
                 <p className="restaurant-desc">{description}</p>
-                <Link
-                  className="link-reserve"
-                  to={`/restaurants/${id}/reserve`}
-                >
+                <Link className="btn-general" to={`/restaurants/${id}/reserve`}>
                   Reserve now &rarr;
                 </Link>
               </div>
