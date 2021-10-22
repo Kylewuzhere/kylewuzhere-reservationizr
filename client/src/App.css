@@ -46,3 +46,23 @@ a:active,
 a:hover {
   color: #eb212e;
 }
+
+.btn-general {
+  background: #eb212e;
+  border: 2px solid transparent;
+  border-radius: 0.25rem;
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  margin-top: 2rem;
+  padding: 0.4rem 1rem;
+  text-decoration: none;
+  width: fit-content;
+}
+
+.btn-general:active,
+.btn-general:hover {
+  background: #fff;
+  border-color: #eb212e;
+  color: #eb212e;
+}
