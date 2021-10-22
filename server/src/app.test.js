@@ -53,5 +53,49 @@ describe("app", () => {
         .expect(200)
         .expect((res) => expect(res.body).toEqual(expected));
     });
+    it("should send a 400 status invalid id provided", async () => {
+      const expectedStatus = 400;
+
+      await request(app).get("/restaurants/11111111").expect(expectedStatus);
+    });
+    it("should send a 404 status restaurant id does not exist", async () => {
+      const expectedStatus = 404;
+
+      await request(app)
+        .get("/restaurants/61460db44aa0cf7175467752")
+        .expect(expectedStatus);
+    });
+  });
+  describe("POST /reservations", () => {
+    it("should create a reservation and send a 201 status", async () => {
+      const expectedStatus = 201;
+      const body = {
+        partySize: 4,
+        date: "2023-11-17T06:30:00.000Z",
+        restaurantName: "Island Grill",
+      };
+
+      await request(app)
+        .post(`/reservations/`)
+        .send(body)
+        .expect(expectedStatus)
+        .expect((response) => {
+          expect(response.body).toEqual(expect.objectContaining(body));
+          expect(response.body.id).toBeTruthy();
+        });
+    });
+    it("should send a 400 invalid request body", async () => {
+      const expectedStatus = 400;
+      const body = {
+        partySize: 0,
+        date: "2023-11-17T06:00:00.000Z",
+        restaurantName: "Island Grill",
+      };
+
+      await request(app)
+        .post("/reservations")
+        .send(body)
+        .expect(expectedStatus);
+    });
   });
 });
