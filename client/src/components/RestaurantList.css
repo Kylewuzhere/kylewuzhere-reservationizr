@@ -14,26 +14,6 @@ h2 {
   margin-top: 0rem;
 }
 
-.link-reserve {
-  background: #eb212e;
-  border: 2px solid transparent;
-  border-radius: 0.25rem;
-  color: #fff;
-  cursor: pointer;
-  display: block;
-  margin-top: 2rem;
-  padding: 0.4rem 1rem;
-  text-decoration: none;
-  width: fit-content;
-}
-
-.link-reserve:active,
-.link-reserve:hover {
-  background: #fff;
-  border-color: #eb212e;
-  color: #eb212e;
-}
-
 @media screen and (min-width: 768px) {
   .restaurant-img {
     min-width: 12.5rem;
