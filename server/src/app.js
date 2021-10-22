@@ -32,7 +32,7 @@ app.post(
     try {
       const { body, user } = req;
       const document = {
-        createdBy: user.sub,
+        userId: user.sub,
         ...body,
       };
       const reservation = new ReservationModel(document);
