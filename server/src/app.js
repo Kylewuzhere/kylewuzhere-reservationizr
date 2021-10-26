@@ -45,6 +45,12 @@ app.post(
   }
 );
 
+app.get("/reservations", checkJwt, async (req, res) => {
+  const { user } = req;
+  const reservation = await ReservationModel.find({ userId: user.sub });
+  return res.status(200).send(reservation);
+});
+
 app.get("/restaurants", async (req, res) => {
   const restaurants = await RestaurantModel.find({});
   return res.status(200).send(restaurants);
