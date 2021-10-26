@@ -47,7 +47,6 @@ const CreateReservation = () => {
 
     if (!response.ok) {
       setIsError(true);
-      console.log(response);
       setErrorStatus(response.status);
     } else {
       history.push("/");
