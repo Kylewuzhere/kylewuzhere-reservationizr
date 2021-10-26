@@ -1,0 +1,11 @@
+.reservation {
+  list-style: none;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px dotted #ccc;
+}
+
+.reserve-date {
+  color: #ccc;
+  margin: 0.5rem auto;
+}
