@@ -26,9 +26,7 @@ const App = () => {
           <Route path="/reservations/:id">
             <Reservation />
           </Route>
-          <Route path="/reservations">
-            <ReservationList />
-          </Route>
+          <ProtectedRoute path="/reservations" component={ReservationList} />
           <Route path="/">
             <RestaurantList />
           </Route>
