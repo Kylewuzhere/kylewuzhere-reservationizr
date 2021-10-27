@@ -124,4 +124,34 @@ describe("app", () => {
         .expect((res) => expect(res.body).toEqual(expectedBody));
     });
   });
+  describe("GET /reservations/:id", () => {
+    it("should retrieve a single reservation data by id", async () => {
+      const expectedBody = {
+        id: "507f1f77bcf86cd799439011",
+        partySize: 4,
+        date: "2023-11-17T06:30:00.000Z",
+        userId: "mock-user-id",
+        restaurantName: "Island Grill",
+      };
+
+      await request(app)
+        .get(`/reservations/${expectedBody.id}`)
+        .set("Application", " application/json")
+        .expect("Content-Type", /json/)
+        .expect(200)
+        .expect((res) => expect(res.body).toEqual(expectedBody));
+    });
+    it("should respond with a 400 status invalid id provided", async () => {
+      const expectedStatus = 400;
+
+      await request(app).get("/reservations/11111111").expect(expectedStatus);
+    });
+    it("should send a 404 status reservation id does not exist", async () => {
+      const expectedStatus = 404;
+
+      await request(app)
+        .get("/reservations/61460db44aa0cf7175467752")
+        .expect(expectedStatus);
+    });
+  });
 });
