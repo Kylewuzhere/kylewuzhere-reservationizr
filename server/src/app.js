@@ -46,9 +46,25 @@ app.post(
 );
 
 app.get("/reservations", checkJwt, async (req, res) => {
-  const { user } = req;
-  const reservation = await ReservationModel.find({ userId: user.sub });
+  const userId = req.user.sub;
+  console.log(userId);
+  const reservation = await ReservationModel.find({ userId: userId });
   return res.status(200).send(reservation);
+});
+
+app.get("/reservation/:id", checkJwt, async (req, res) => {
+  const { id } = req.params;
+
+  if (validId(id)) {
+    const reservation = await ReservationModel.findById(id);
+    if (reservation === null) {
+      return res.status(404).send("Sorry! We can't find that reservation'");
+    } else {
+      res.status(200).send(reservation);
+    }
+  } else {
+    res.status(400).send("Invalid ID is provided");
+  }
 });
 
 app.get("/restaurants", async (req, res) => {
