@@ -10,7 +10,8 @@
   padding: 0.5rem auto;
 }
 
-.reserve-link {
+.reservations-link,
+.no-reservations-link {
   color: #eb212e;
 }
 
@@ -21,7 +22,7 @@
     align-items: center;
   }
 
-  .reserve-link {
+  .reservations-link {
     justify-self: right;
   }
 }
