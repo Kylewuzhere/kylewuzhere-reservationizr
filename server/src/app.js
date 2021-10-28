@@ -47,23 +47,29 @@ app.post(
 
 app.get("/reservations", checkJwt, async (req, res) => {
   const userId = req.user.sub;
-  console.log(userId);
   const reservation = await ReservationModel.find({ userId: userId });
   return res.status(200).send(reservation);
 });
 
-app.get("/reservation/:id", checkJwt, async (req, res) => {
+app.get("/reservations/:id", checkJwt, async (req, res) => {
   const { id } = req.params;
+  const userId = req.user.sub;
 
   if (validId(id)) {
     const reservation = await ReservationModel.findById(id);
     if (reservation === null) {
-      return res.status(404).send("Sorry! We can't find that reservation'");
+      return res.status(404).send({ error: "not found" });
+    } else if (reservation.userId !== userId) {
+      return res
+        .status(403)
+        .send("User does not have permission to access this reservation");
     } else {
       res.status(200).send(reservation);
     }
   } else {
-    res.status(400).send("Invalid ID is provided");
+    res.status(400).send({
+      error: "invalid id provided",
+    });
   }
 });
 
@@ -78,14 +84,12 @@ app.get("/restaurants/:id", async (req, res) => {
   if (validId(id)) {
     const restaurant = await RestaurantModel.findById(id);
     if (restaurant === null) {
-      return res
-        .status(404)
-        .send("The restaurant trying to be retrieved does not exist");
+      return res.status(404).send({ error: "restaurant not found" });
     } else {
       res.status(200).send(restaurant);
     }
   } else {
-    res.status(400).send("Invalid ID is provided");
+    res.status(400).send({ error: "invalid id provided" });
   }
 });
 
