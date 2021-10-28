@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const RestaurantList = () => {
   const [restaurantList, setRestaurantList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -11,9 +12,15 @@ const RestaurantList = () => {
 
       const data = await res.json();
       setRestaurantList(data);
+      setIsLoading(false);
     };
     fetchData();
   }, []);
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <>
       <h1>Restaurants</h1>

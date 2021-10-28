@@ -6,6 +6,7 @@ import { formatDate } from "../utils/formatDate";
 
 const ReservationList = () => {
   const [reservationList, setReservationList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const { getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
@@ -21,9 +22,14 @@ const ReservationList = () => {
 
       const data = await response.json();
       setReservationList(data);
+      setIsLoading(false);
     };
     fetchData();
   }, [getAccessTokenSilently]);
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <>
@@ -34,7 +40,9 @@ const ReservationList = () => {
             <li className="reservation" key={id}>
               <strong>{restaurantName}</strong>
               <p className="reserve-date">{formatDate(date)}</p>
-              <Link>View Details &rarr;</Link>
+              <Link className="reserve-link" to={`reservations/${id}`}>
+                View Details &rarr;
+              </Link>
             </li>
           );
         })}

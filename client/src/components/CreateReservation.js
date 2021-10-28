@@ -10,6 +10,7 @@ const CreateReservation = () => {
   const [restaurant, setRestaurant] = useState({});
   const [partySize, setPartySize] = useState("");
   const [date, setDate] = useState(new Date());
+  const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [errorStatus, setErrorStatus] = useState(false);
   const history = useHistory();
@@ -23,6 +24,7 @@ const CreateReservation = () => {
 
       const data = await res.json();
       setRestaurant(data);
+      setIsLoading(false);
     };
     fetchData();
   }, [restaurantId]);
@@ -63,6 +65,10 @@ const CreateReservation = () => {
         <p>Date must be greater than or equal to the current date.</p>
       </>
     );
+  }
+
+  if (isLoading) {
+    return <p>Loading...</p>;
   }
 
   return (
