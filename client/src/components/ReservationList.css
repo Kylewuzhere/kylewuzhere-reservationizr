@@ -6,6 +6,22 @@
 }
 
 .reserve-date {
-  color: #ccc;
-  margin: 0.5rem auto;
+  color: rgb(125, 125, 125);
+  padding: 0.5rem auto;
+}
+
+.reserve-link {
+  color: #eb212e;
+}
+
+@media (min-width: 768px) {
+  .reservation {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+  }
+
+  .reserve-link {
+    justify-self: right;
+  }
 }
