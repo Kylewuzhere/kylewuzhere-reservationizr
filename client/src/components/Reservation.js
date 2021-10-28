@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { formatDate } from "../utils/formatDate";
@@ -8,6 +8,7 @@ const Reservation = () => {
   const { id } = useParams();
   const [reservation, setReservation] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
   const { getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
@@ -21,6 +22,10 @@ const Reservation = () => {
         },
       });
 
+      if (!response.ok) {
+        setIsError(true);
+      }
+
       const data = await response.json();
       setReservation(data);
       setIsLoading(false);
@@ -32,14 +37,30 @@ const Reservation = () => {
     return <p>Loading...</p>;
   }
 
+  if (isError) {
+    return (
+      <>
+        <p className="error">Sorry! We can't find that reservation</p>
+        <Link className="btn" to={"/reservations"}>
+          &larr; Back to reservations
+        </Link>
+      </>
+    );
+  }
+
   return (
     <>
-      <h1>{reservation.restaurantName}</h1>
-      <p>{formatDate(reservation.date)}</p>
-      <p>
-        <strong>Party size:</strong>
-        {reservation.partySize}
-      </p>
+      <div className="reservation-page">
+        <h1 className="reservation-title">{reservation.restaurantName}</h1>
+        <p>{formatDate(reservation.date)}</p>
+        <p>
+          <strong>Party size: </strong>
+          {reservation.partySize}
+        </p>
+      </div>
+      <Link className="btn" to={"/reservations"}>
+        &larr; Back to reservations
+      </Link>
     </>
   );
 };
