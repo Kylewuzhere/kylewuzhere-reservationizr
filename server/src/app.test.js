@@ -144,13 +144,20 @@ describe("app", () => {
     it("should respond with a 400 status invalid id provided", async () => {
       const expectedStatus = 400;
 
-      await request(app).get("/reservations/11111111").expect(expectedStatus);
+      await request(app).get("/reservations/0000000").expect(expectedStatus);
     });
     it("should send a 404 status reservation id does not exist", async () => {
       const expectedStatus = 404;
 
       await request(app)
         .get("/reservations/61460db44aa0cf7175467752")
+        .expect(expectedStatus);
+    });
+    it("should send a 403 status user does not have permission to access this reservation", async () => {
+      const expectedStatus = 403;
+
+      await request(app)
+        .get("/reservations/61679189b54f48aa6599a7fd")
         .expect(expectedStatus);
     });
   });
