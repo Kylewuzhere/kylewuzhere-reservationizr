@@ -8,7 +8,7 @@ const RestaurantList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(`http://localhost:5000/restaurants`);
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/restaurants`);
 
       const data = await res.json();
       setRestaurantList(data);

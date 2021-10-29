@@ -19,7 +19,7 @@ const CreateReservation = () => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch(
-        `http://localhost:5000/restaurants/${restaurantId}`
+        `${process.env.REACT_APP_API_URL}/restaurants/${restaurantId}`
       );
 
       const data = await res.json();
