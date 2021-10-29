@@ -62,7 +62,9 @@ app.get("/reservations/:id", checkJwt, async (req, res) => {
     } else if (reservation.userId !== userId) {
       return res
         .status(403)
-        .send("User does not have permission to access this reservation");
+        .send({
+          error: "user does not have permission to access this reservation",
+        });
     } else {
       res.status(200).send(reservation);
     }
